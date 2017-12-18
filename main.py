@@ -9,7 +9,7 @@ from pyfiglet import figlet_format
 
 #Get local installed packages
 f1 = open("installed.txt", "w+")
-f1.write(subprocess.check_output(['bash', '-c', 'pacman -Q|cut -f 1 -d " "', 'shell=True']))
+f1.write(subprocess.check_output(['bash', '-c', 'apt-cache search .|cut -f 1 -d " "', 'shell=True']))
 f1.close()
 
 #Get Parabola blacklist
@@ -31,6 +31,6 @@ with open('installed.txt') as installed:
 cprint(figlet_format(('%s ABSOLUTELY PROPRIETARY PACKAGES' % (countproprietary)), font='univers', width=160),
        'green', attrs=['bold'])
 
-total=int(subprocess.check_output(['bash', '-c', 'pacman -Q | wc -l', 'shell=True']))
+total=int(subprocess.check_output(['bash', '-c', 'apt-cache search . | wc -l', 'shell=True']))
 stallmanfreedomindex=(total-countproprietary)*100/total
 print ("%s proprietary out of %s total installed. Your Stallman Freedom index is %.2f") % (countproprietary,total,stallmanfreedomindex)
